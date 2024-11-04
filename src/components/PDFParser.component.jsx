@@ -1,6 +1,8 @@
 import { useState } from "react";
 import pdfToText from "react-pdftotext";
 import * as XLSX from "xlsx";
+import { Input } from "./ui/input";
+import { Label } from "@/components/ui/label";
 
 function PDFParserReact({ setParsedText }) {
   function isExcelFile(file) {
@@ -14,7 +16,6 @@ function PDFParserReact({ setParsedText }) {
       "xlam",
     ];
     const fileExtension = file.name.split(".").pop().toLowerCase();
-    console.log(fileExtension);
     return allowedExtensions.includes(fileExtension);
   }
   function extractText(event) {
@@ -37,17 +38,21 @@ function PDFParserReact({ setParsedText }) {
       const sheetName = workbook.SheetNames[0];
       const sheet = workbook.Sheets[sheetName];
       const sheetData = XLSX.utils.sheet_to_json(sheet);
-      console.log(sheetData);
       setParsedText(sheetData);
     };
 
     reader.readAsBinaryString(file);
   };
   return (
-    <div className="App">
-      <header className="App-header">
-        <input type="file" onChange={extractText} />
-      </header>
+    <div className="flex flex-col gap-1">
+      <Label htmlFor="spreadsheet">Choose Spreadsheet</Label>
+      <Input
+        id="spreadsheet"
+        type="file"
+        accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+        onChange={extractText}
+      />
+   
     </div>
   );
 }
