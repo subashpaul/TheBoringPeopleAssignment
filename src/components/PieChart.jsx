@@ -2,10 +2,10 @@ import { Pie } from "react-chartjs-2";
 
 export const PieChart = ({ data }) => {
   const chartData = {
-    labels: data.map((item) => item.Date), // Adjust based on your data structure
+    labels: Array.isArray(data) ? data?.map((item) => item?.Date) : null, // assuming you have dates
     datasets: [
       {
-        data: data.map((item) => item.Sales), // Assuming you have amounts
+        data: Array.isArray(data) ? data?.map((item) => item?.Sales) : null, // assuming you have amounts
         backgroundColor: [
           "rgba(255, 99, 132, 0.6)",
           "rgba(54, 162, 235, 0.6)",

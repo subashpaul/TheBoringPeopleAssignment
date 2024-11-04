@@ -14,17 +14,17 @@ function PDFParserReact({ setParsedText }) {
       "xlam",
     ];
     const fileExtension = file.name.split(".").pop().toLowerCase();
-    console.log(fileExtension);
     return allowedExtensions.includes(fileExtension);
   }
   function extractText(event) {
     const file = event.target.files[0];
-    console.log(file);
     if (isExcelFile(file)) {
       return handleXLSXFileUpload(event);
     }
     pdfToText(file)
-      .then((text) => setParsedText(text))
+      .then((text) => {
+        setParsedText(text);
+      })
       .catch((error) => console.error("Failed to extract text from pdf"));
   }
 
@@ -37,7 +37,6 @@ function PDFParserReact({ setParsedText }) {
       const sheetName = workbook.SheetNames[0];
       const sheet = workbook.Sheets[sheetName];
       const sheetData = XLSX.utils.sheet_to_json(sheet);
-      console.log(sheetData);
       setParsedText(sheetData);
     };
 

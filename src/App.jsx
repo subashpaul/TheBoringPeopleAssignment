@@ -24,17 +24,17 @@ function App() {
 
       {/* <p>{parsedText}</p> */}
       <div className="stats border">
-        {chartType === "bar" && parsedText && (
+        {chartType === "bar" && parsedText && Array.isArray(parsedText) && (
           <div className="mx-auto w-[80%]">
             <BarChart data={parsedText} />
           </div>
         )}
-        {chartType === "pie" && parsedText && (
+        {chartType === "pie" && parsedText && Array.isArray(parsedText) && (
           <div className="mx-auto w-[50%]">
             <PieChart data={parsedText} />
           </div>
         )}
-        {chartType === "bar&pie" && parsedText && (
+        {chartType === "bar&pie" && parsedText && Array.isArray(parsedText) && (
           <div className="flex gap-4 ">
             <div className="w-[50%] my-auto">
               <BarChart data={parsedText} />
@@ -47,9 +47,13 @@ function App() {
         )}
       </div>
       <h3 className="mt-4 font-bold">Data</h3>
-      <pre className="h-64 overflow-scroll w-full border">
-        {JSON.stringify(parsedText, null, 2)}
-      </pre>
+      {Array.isArray(parsedText) ? (
+        <pre className="h-64 overflow-scroll w-full border">
+          {JSON.stringify(parsedText, null, 2)}
+        </pre>
+      ) : (
+        parsedText
+      )}
     </div>
   );
 }

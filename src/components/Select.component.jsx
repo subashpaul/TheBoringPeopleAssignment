@@ -15,7 +15,7 @@ const SelectComponent = ({ setChartType }) => {
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder="Select Option" />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent defaultValue="bar">
         <SelectItem value="bar">Bar</SelectItem>
         <SelectItem value="pie">Pie</SelectItem>
         <SelectItem value="bar&pie">Bar & Pie</SelectItem>

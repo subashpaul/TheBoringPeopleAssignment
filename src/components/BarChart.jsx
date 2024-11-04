@@ -7,11 +7,11 @@ Chart.register(CategoryScale);
 
 const BarChart = ({ data }) => {
   const chartData = {
-    labels: data.map((item) => item.Date), // assuming you have dates
+    labels: Array.isArray(data) ? data?.map((item) => item?.Date) : null, // assuming you have dates
     datasets: [
       {
         label: "Sales",
-        data: data.map((item) => item.Sales), // assuming you have amounts
+        data: Array.isArray(data) ? data?.map((item) => item?.Sales) : null, // assuming you have amounts
         backgroundColor: "rgba(75,192,192,1)",
         borderColor: "rgba(75,192,192,1)",
         borderWidth: 3,
@@ -19,11 +19,7 @@ const BarChart = ({ data }) => {
     ],
   };
 
-  return (
-    // <div className=" w-full">
-    <Bar data={chartData} />
-    // </div>
-  );
+  return <Bar data={chartData} />;
 };
 
 export default BarChart;
