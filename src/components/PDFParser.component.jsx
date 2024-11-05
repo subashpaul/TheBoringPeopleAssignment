@@ -1,6 +1,8 @@
 import { useState } from "react";
 import pdfToText from "react-pdftotext";
 import * as XLSX from "xlsx";
+import { Input } from "./ui/input";
+import { Label } from "@/components/ui/label";
 
 function PDFParserReact({ setParsedText }) {
   function isExcelFile(file) {
@@ -25,7 +27,7 @@ function PDFParserReact({ setParsedText }) {
       .then((text) => {
         setParsedText(text);
       })
-      .catch((error) => console.error("Failed to extract text from pdf"));
+      .catch((_) => console.error("Failed to extract text from pdf"));
   }
 
   const handleXLSXFileUpload = (e) => {
@@ -43,10 +45,25 @@ function PDFParserReact({ setParsedText }) {
     reader.readAsBinaryString(file);
   };
   return (
-    <div className="App">
-      <header className="App-header">
-        <input type="file" onChange={extractText} />
-      </header>
+    <div className="flex flex-col gap-1">
+      <Label htmlFor="spreadsheet">Choose Spreadsheet</Label>
+      <div className="flex gap-2">
+        <div>
+          <Input
+            id="spreadsheet"
+            type="file"
+            accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel,application/pdf"
+            onChange={extractText}
+          />
+          <p className="text-xs italic text-red-400 mt-1">
+            *Check the format in the sample spreadsheet
+          </p>
+        </div>
+
+        <a href="../assets/sales.xlsx" download className="underline">
+          Sample_Spreadsheet
+        </a>
+      </div>
     </div>
   );
 }
