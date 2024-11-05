@@ -60,7 +60,7 @@ function PDFParserReact({ setParsedText }) {
           </p>
         </div>
 
-        <a href="../sales.xlsx" download className="underline">
+        <a href="/sales.xlsx" download className="underline">
           Sample_Spreadsheet
         </a>
       </div>
