@@ -3,4 +3,4 @@
 This website can be used to view the statistics of any business or enterprise.
 Analyze a spreadsheet, with the help of bar graph and pie chart to have a better understanding of the data.
 
-- [Demo Link](https://boringassignment.netlify.app/stats) Website Link
+- [Demo Link](https://boringassignment.netlify.app) Website Link
